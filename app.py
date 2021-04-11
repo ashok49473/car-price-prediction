@@ -7,22 +7,11 @@ from feature_engine.encoding import OneHotEncoder
 from feature_engine.wrappers import SklearnTransformerWrapper
 from sklearn.preprocessing import MinMaxScaler
 
-#add NO of years attribute
-class AtributeAdder(BaseEstimator):
-    def fit(self, X, y=None):
-        return self
-    
-    def transform(self, X, y=None):
-        temp = X.copy()
-        temp.loc[:, 'No_of_Yrs'] = 2021 - X.Year
-        temp.drop('Year', axis=1, inplace=True)
-        return temp
 ###########################################################################################
 #preprocessing pipeline
 cat_features=['Fuel_Type', 'Seller_Type', 'Transmission']
 
 pipe = Pipeline(steps=[
-    ("attribute adder", AtributeAdder()),
     
     ('one hot encoder', OneHotEncoder(variables=cat_features)),
     
@@ -56,6 +45,7 @@ def home():
 def predict():
 	if request.method == 'POST':
 		Year = int(request.form.get('year'))
+		Year = 2021 - Year
 		Present_Price = float(request.form.get('pr_price'))
 		Kms_Driven = float(request.form.get('kms'))
 		Fuel_Type = request.form.get('fuel')
