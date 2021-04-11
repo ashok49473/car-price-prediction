@@ -2,6 +2,10 @@ from flask import Flask, render_template, request
 import pickle
 from pandas import DataFrame
 from sklearn.base import BaseEstimator
+from sklearn.pipeline import Pipeline
+from feature_engine.encoding import OneHotEncoder
+from feature_engine.wrappers import SklearnTransformerWrapper
+from sklearn.preprocessing import MinMaxScaler
 
 #add NO of years attribute
 class AtributeAdder(BaseEstimator):
@@ -13,7 +17,20 @@ class AtributeAdder(BaseEstimator):
         temp.loc[:, 'No_of_Yrs'] = 2021 - X.Year
         temp.drop('Year', axis=1, inplace=True)
         return temp
+###########################################################################################
+#preprocessing pipeline
+cat_features=['Fuel_Type', 'Seller_Type', 'Transmission']
 
+pipe = Pipeline(steps=[
+    ("attribute adder", AtributeAdder()),
+    
+    ('one hot encoder', OneHotEncoder(variables=cat_features)),
+    
+    ('min max scaler', SklearnTransformerWrapper( variables = ['Kms_Driven'],
+                                                 transformer=MinMaxScaler(feature_range=(0, 100) ) ) )
+    
+])
+###########################################################################################
 with open("pipe.pkl", "rb") as f:
 	preprocessor = pickle.load(f)
 

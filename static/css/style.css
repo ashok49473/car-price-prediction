@@ -9,6 +9,7 @@
 .form-control{
 	width: 500px;
 }
-.container{
-	background-color: #FECB00;
+
+.container.home{
+	background-color: skyblue;
 }

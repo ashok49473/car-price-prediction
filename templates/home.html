@@ -3,6 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<div class="container home">
 <form method="POST" action="{{ url_for('predict') }}">
   <br><h3 align="center">Estimate the selling price of your used car.</h3><br>
 
@@ -38,5 +39,6 @@
     <button type="submit" class="btn btn-primary">Predict</button>
   </div>
 </form>
+</div>
 <br>
 {% endblock %}
