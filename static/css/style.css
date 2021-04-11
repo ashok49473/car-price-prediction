@@ -1,0 +1,14 @@
+.result {
+  border: 1px solid black;
+  background-color: lightblue;
+  padding-top: 100px;
+  padding-right: 30px;
+  padding-bottom: 100px;
+  padding-left: 30px;
+}
+.form-control{
+	width: 500px;
+}
+.container{
+	background-color: #FECB00;
+}

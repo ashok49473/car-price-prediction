@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('predict') }}">
+  <br><h3 align="center">Estimate the selling price of your used car.</h3><br>
+
+  <input type="text" name="year" class="form-control" required="required" placeholder="Year"><br>
+
+  <input type="text" name="pr_price" class="form-control" required="required" placeholder="Present Price"><br>
+
+  <input type="text" name="kms" class="form-control" required="required" placeholder="Kms Drived"><br>
+
+  <input type="text" name="owner" class="form-control" required="required" placeholder="previous owners"><br>
+
+  <label for="fuel"> Fuel_Type:</label>
+  <select name = "fuel" class="form-control">
+            <option value = "Petrol" selected>Petrol</option>
+            <option value = "Diesel">Diesel</option>
+            <option value = "CNG">CNG</option>
+  </select><br>
+
+  <label for="seller">Seller_Type:</label>
+  <select name = "seller" class="form-control">
+            <option value = "Dealer" selected>Dealer</option>
+            <option value = "Individual">Individual</option>
+  </select><br>
+
+  <label for="trans"> Transmission:</label>
+  <select name = "trans" class="form-control">
+            <option value = "Manual" selected>Manual</option>
+            <option value = "Automatic">Automatic</option>
+  </select><br>
+
+
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Predict</button>
+  </div>
+</form>
+<br>
+{% endblock %}
